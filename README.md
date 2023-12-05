@@ -138,9 +138,9 @@ The [StrategusCodeToRun.R](StrategusCodeToRun.R) contains the script that will p
 ```
 ##=========== START OF INPUTS ==========
 keyringName <- "PHNetworkStudy"
-connectionDetailsReference <- "mdcd"
-workDatabaseSchema <- 'scratch_jswerdel'
-cdmDatabaseSchema <- 'cdm_truven_mdcd_v2565'
+connectionDetailsReference <- "myDatasourceKey" #change to what myDatasourceKey was to in keyringSetup.R
+workDatabaseSchema <- 'scratch_jswerdel' #change to a database area where you have write access
+cdmDatabaseSchema <- 'cdm_truven_mdcd_v2565' #change to your cdm schema name
 outputLocation <- 'D:/projects/PHNetworkStudy/Strategus' #change to a location with at least 1 GB of disk space
 resultsLocation <- 'D:/projects/PHNetworkStudy/Results' #change to a location with at least 1 GB of disk space
 minCellCount <- 5
