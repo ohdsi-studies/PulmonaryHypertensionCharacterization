@@ -137,14 +137,14 @@ The [StrategusCodeToRun.R](StrategusCodeToRun.R) contains the script that will p
 
 ```
 ##=========== START OF INPUTS ==========
-keyringName <- "HowOften"
-connectionDetailsReference <- "mYDatasourceKey"
-workDatabaseSchema <- 'writable_schema'
-cdmDatabaseSchema <- 'cdm_schema'
-outputLocation <- '{path/to/Strategus/Output}'
-resultsLocation <- '{path/to/Strategus/Results}'
-minCellCount <- 5 # set this to a value where you want to censor small cells
-cohortTableName <- "howoften_cohort"
+keyringName <- "PHNetworkStudy"
+connectionDetailsReference <- "mdcd"
+workDatabaseSchema <- 'scratch_jswerdel'
+cdmDatabaseSchema <- 'cdm_truven_mdcd_v2565'
+outputLocation <- 'D:/projects/PHNetworkStudy/Strategus' #change to a location with at least 1 GB of disk space
+resultsLocation <- 'D:/projects/PHNetworkStudy/Results' #change to a location with at least 1 GB of disk space
+minCellCount <- 5
+cohortTableName <- "phnetworkstudy_cohort"
 ```
 
 Note: the outputLocation will be reused between analysis exeuctions to cache cohort generation info.   Each analysis execution will copy from the `outputLocation` to the `resultsLocation` under the directory dedicated to the individual studies.  The `resultsLocation` folder will be zipped and submitted for inclusion in the ShinyApp viewer.
@@ -169,7 +169,7 @@ executionSettings <- Strategus::createCdmExecutionSettings(
 )
 
 executeAnalysis <- function(analysisFile, executionSettings, analysisName, outputLocation, resultsLocation, keyringName) {
-
+  
   analysisSpecifications <- ParallelLogger::loadSettingsFromJson(
     fileName = analysisFile
   )
@@ -180,47 +180,23 @@ executeAnalysis <- function(analysisFile, executionSettings, analysisName, outpu
     executionScriptFolder = file.path(outputLocation, connectionDetailsReference, "strategusExecution"),
     keyringName = keyringName
   )
-
+  
   # copy Results to final location
   resultsDir <- file.path(resultsLocation, analysisName, connectionDetailsReference)
-
+  
   if (dir.exists(resultsDir)) {
     unlink(resultsDir, recursive = TRUE)
   }
   dir.create(file.path(resultsDir), recursive = TRUE)
   file.copy(file.path(outputLocation, connectionDetailsReference, "strategusOutput"),
             file.path(resultsDir), recursive = TRUE)
-
+  
   return(NULL)
-
+  
 }
 
-```
-
-**Part 3** executes the individual HowOften analyses:
-
-```
-# Step 1 : Execute Azza Analysis
-executeAnalysis("howoften_azza.json", executionSettings, "azza", outputLocation, resultsLocation, keyringName)
-
-# Step 2 : Execute Andreas Analysis
-executeAnalysis("howoften_andreas.json", executionSettings, "andreas", outputLocation, resultsLocation, keyringName)
-
-# Step 3, Joel Analysis
-executeAnalysis("howoften_joel.json", executionSettings, "joel", outputLocation, resultsLocation, keyringName)
-
-# step 4, Evan analysis
-executeAnalysis("howoften_evan.json", executionSettings, "evan", outputLocation, resultsLocation, keyringName)
-
-# step 5, gowza analysis
-executeAnalysis("howoften_gowza.json", executionSettings, "gowza", outputLocation, resultsLocation, keyringName)
-
-# step 6, overall analysis
-executeAnalysis("howoften_overall.json", executionSettings, "overall", outputLocation, resultsLocation, keyringName)
-
-# step 7, george analysis
-executeAnalysis("howoften_george.json", executionSettings, "george", outputLocation, resultsLocation, keyringName)
-
+# Execute the analysis
+executeAnalysis("analysisSpecifications.json", executionSettings, "phnetworkstudy", outputLocation, resultsLocation, keyringName)
 ```
 
 ### Submitting Results
