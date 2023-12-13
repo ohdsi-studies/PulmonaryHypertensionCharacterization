@@ -1,10 +1,11 @@
 ##=========== START OF INPUTS ==========
-connectionDetailsReference <- connectionDetailsReference
-outputLocation <- outputLocation
+connectionDetailsReference <- "mdcd" #connectionDetailsReference parameter located in keyringSeup.R file
+outputLocation <- 'D:/git/joelswerdel/PHNetwork study' #outputLocation parameter found in StrategusCodeToRun.R file
 # For uploading the results. You should have received the key file from the study coordinator:
 keyFileName <- "[location where you are storing: e.g. ~/keys/study-data-site-covid19.dat]"
 userName <- "study-data-site-covid19"
 ##=========== END OF INPUTS ==========
+
 ##################################
 # DO NOT MODIFY BELOW THIS POINT
 ##################################

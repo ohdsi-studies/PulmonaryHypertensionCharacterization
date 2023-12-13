@@ -204,3 +204,14 @@ executeAnalysis("analysisSpecifications.json", executionSettings, "phnetworkstud
 Once the analyses executions are complete, the Results folder is zipped and submitted to an FTP location for processing.  Results that are properly submitted and formatted will be uploaded to OHDSI servers and will be available on [results.ohdsi.org](https://results.ohdsi.org/)
 
 The [ShareResults.R](ShareResults.R) contains the script that will zip the results files and upload the results to the FTP location.
+
+Set up variables that will be used as input to execution:
+
+```
+##=========== START OF INPUTS ==========
+connectionDetailsReference <- "mdcd" #connectionDetailsReference parameter located in keyringSeup.R file
+outputLocation <- 'D:/git/joelswerdel/PHNetwork study' #outputLocation parameter found in StrategusCodeToRun.R file
+# For uploading the results. You should have received the key file from the study coordinator:
+keyFileName <- "[location where you are storing: e.g. ~/keys/study-data-site-PHNetworkStudy.dat]"
+userName <- "study-data-site-PHNetworkStudy"
+```
