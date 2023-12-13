@@ -108,7 +108,7 @@ connectionDetails <- NULL # fetch/create your own connection details here
 
 connectionDetailsReference <- "myDatasourceKey" # short abbreviation that describes these connection details
 
-# test the connection
+# test the connection 
 conn <- DatabaseConnector::connect(connectionDetails)
 DatabaseConnector::disconnect(conn)
 ```
@@ -201,4 +201,6 @@ executeAnalysis("analysisSpecifications.json", executionSettings, "phnetworkstud
 
 ### Submitting Results
 
-Once the analyses executions are complete (not all are required to be completed, some analyses are very large and may not be completed in time for the OHDSI Symposium), the Results folder is zipped and submitted to an FTP location for processing.  Results that are properlly submitted and formatted will be uploaded to OHDSI servers and will be available on [results.ohdsi.org](https://results.ohdsi.org/)
+Once the analyses executions are complete, the Results folder is zipped and submitted to an FTP location for processing.  Results that are properly submitted and formatted will be uploaded to OHDSI servers and will be available on [results.ohdsi.org](https://results.ohdsi.org/)
+
+The [ShareResults.R](ShareResults.R) contains the script that will zip the results files and upload the results to the FTP location.
